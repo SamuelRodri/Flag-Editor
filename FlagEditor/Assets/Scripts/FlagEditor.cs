@@ -12,26 +12,33 @@ public class FlagEditor : MonoBehaviour
     {
         flag.OnClick += FloodFill;
         //Debug.Log("Hola");
-        /*originalTexture = flag.GetComponent<SpriteRenderer>().sprite.texture;
-        newTexture = new Texture2D(300, 200);
+        /*texture = GetComponent<SpriteRenderer>().sprite.texture;
+        Vector2 mousePos = Input.mousePosition;
+        Color originalColor = texture.GetPixel((int)mousePos.x, (int)mousePos.y);
 
-        for (int y = 0; y < originalTexture.height; y++)
-        {
-            for (int x = 0; x < originalTexture.width; x++)
-            {
-                if (originalTexture.GetPixel(x, y).Equals(Color.white))
-                {
-                    originalTexture.SetPixel(x, y, Color.red);
-                }
-            }
-        }
-        originalTexture.Apply();
-        flag.GetComponent<SpriteRenderer>().sprite = Sprite.Create(originalTexture, new Rect(0.0f, 0.0f, 300, 200), new Vector2(0.5f, 0.5f), 100.0f);
-    }*/
+        //FloodFill(new Node((int)mousePos.x, (int)mousePos.y), Color.blue);
+        FloodFill(new Node(0, 0), Color.red);
+        GetComponent<Renderer>().material.mainTexture = texture;
+        texture.Apply();
+        GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);*/
     }
 
-    private void FloodFill()
+    private void FloodFill()//(Node node, Color color)
     {
-        
+        /*Queue Q = new Queue();
+        Q.Enqueue(node);
+        while (Q.Count != 0)
+        {
+            Node actualNode = (Node)Q.Dequeue();
+
+            if (0 <= actualNode.x && actualNode.x <= texture.width && actualNode.y <= texture.height && actualNode.y >= 0 && !texture.GetPixel(actualNode.x, actualNode.y).Equals(Color.black) && !texture.GetPixel(actualNode.x, actualNode.y).Equals(color))
+            {
+                texture.SetPixel(actualNode.x, actualNode.y, color);
+                Q.Enqueue(new Node(actualNode.x + 1, actualNode.y));
+                Q.Enqueue(new Node(actualNode.x, actualNode.y + 1));
+                Q.Enqueue(new Node(actualNode.x - 1, actualNode.y));
+                Q.Enqueue(new Node(actualNode.x, actualNode.y - 1));
+            }
+        }*/
     }
 }
