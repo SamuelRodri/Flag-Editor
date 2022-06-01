@@ -34,10 +34,10 @@ public class Flag : MonoBehaviour
             Color originalColor = texture.GetPixel((int)mousePos.x, (int)mousePos.y);
 
             //FloodFill(new Node((int)mousePos.x, (int)mousePos.y), Color.blue);
-            FloodFill(new Node(0, 0), Color.blue);
+            FloodFill(new Node(0, 0), Color.red);
             GetComponent<Renderer>().material.mainTexture = texture;
             texture.Apply();
-            GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.height, texture.width), new Vector2(0.5f, 0.5f), 100.0f);
+            GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
         }
     }
 
