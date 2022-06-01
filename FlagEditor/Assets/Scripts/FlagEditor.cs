@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class FlagEditor : MonoBehaviour
 {
-    public GameObject flag;
+    public Flag flag;
     private Texture2D originalTexture;
     private Texture2D newTexture;
+
     void Start()
     {
+        flag.OnClick += FloodFill;
+        //Debug.Log("Hola");
         /*originalTexture = flag.GetComponent<SpriteRenderer>().sprite.texture;
         newTexture = new Texture2D(300, 200);
 
@@ -25,5 +28,10 @@ public class FlagEditor : MonoBehaviour
         originalTexture.Apply();
         flag.GetComponent<SpriteRenderer>().sprite = Sprite.Create(originalTexture, new Rect(0.0f, 0.0f, 300, 200), new Vector2(0.5f, 0.5f), 100.0f);
     }*/
+    }
+
+    private void FloodFill()
+    {
+        
     }
 }

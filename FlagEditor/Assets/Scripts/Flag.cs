@@ -18,10 +18,14 @@ public class Flag : MonoBehaviour
 {
     private Color limitColor = Color.black;
     Texture2D texture;
+
+    public delegate void Click();
+    public event Click OnClick;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+           
     }
 
     // Update is called once per frame
@@ -29,7 +33,8 @@ public class Flag : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            texture = GetComponent<SpriteRenderer>().sprite.texture;
+            OnClick(); // Observer Update
+            /*texture = GetComponent<SpriteRenderer>().sprite.texture;
             Vector2 mousePos = Input.mousePosition;
             Color originalColor = texture.GetPixel((int)mousePos.x, (int)mousePos.y);
 
@@ -37,7 +42,7 @@ public class Flag : MonoBehaviour
             FloodFill(new Node(0, 0), Color.red);
             GetComponent<Renderer>().material.mainTexture = texture;
             texture.Apply();
-            GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+            GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);*/
         }
     }
 
