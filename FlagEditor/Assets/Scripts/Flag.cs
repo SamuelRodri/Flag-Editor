@@ -23,9 +23,22 @@ public class Flag : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 clickPoint = transform.InverseTransformDirection(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            Debug.Log(clickPoint);
-            OnClick(texture, (int)clickPoint.x, (int)clickPoint.y); // Observer Update
+            // Mouse Coordinates in Screen
+            Vector2 mouseCoord = Input.mousePosition;
+
+            // Mouse Coordinates in World
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(mouseCoord);
+
+            // Mouse Coordinates in relation to Sprite
+            Vector2 localPos = transform.InverseTransformPoint(worldPos) * 100;
+
+            // Pivot of texture
+            var texSpacePivot = new Vector2(GetComponent<SpriteRenderer>().sprite.rect.x, GetComponent<SpriteRenderer>().sprite.rect.y) + GetComponent<SpriteRenderer>().sprite.pivot;
+
+            // Mouse Coordinates in Pixels in relation to Sprite
+            Vector2 texSpaceCoord = texSpacePivot + localPos;
+
+            OnClick(texture, (int)texSpaceCoord.x, (int)texSpaceCoord.y); // Observer Update
         }
     }
 }
