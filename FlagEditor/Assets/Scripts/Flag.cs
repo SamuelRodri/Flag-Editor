@@ -2,30 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node
-{
-    public int x { get; }
-    public int y { get; }
-
-    public Node(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 public class Flag : MonoBehaviour
 {
     private Color limitColor = Color.black;
     Texture2D texture;
 
-    public delegate void Click();
+    public delegate void Click(Texture2D readTexture, int x, int y);
     public event Click OnClick;
 
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-           
+        texture = GetComponent<SpriteRenderer>().sprite.texture;
     }
 
     // Update is called once per frame
@@ -33,7 +23,9 @@ public class Flag : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            OnClick(); // Observer Update
+            Vector3 clickPoint = transform.InverseTransformDirection(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Debug.Log(clickPoint);
+            OnClick(texture, (int)clickPoint.x, (int)clickPoint.y); // Observer Update
         }
     }
 }
