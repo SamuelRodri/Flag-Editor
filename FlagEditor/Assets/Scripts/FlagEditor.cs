@@ -18,6 +18,7 @@ public class Node
 public class FlagEditor : MonoBehaviour
 {
     public Flag flag;
+    private Color limitColor = Color.black;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class FlagEditor : MonoBehaviour
         {
             Node actualNode = (Node)Q.Dequeue();
 
-            if (0 <= actualNode.x && actualNode.x <= readTexture.width && actualNode.y <= readTexture.height && actualNode.y >= 0 && !readTexture.GetPixel(actualNode.x, actualNode.y).Equals(Color.black) && !writeTexture.GetPixel(actualNode.x, actualNode.y).Equals(Color.red))
+            if (CheckValidity(readTexture, actualNode.x, actualNode.y, writeTexture, Color.red))
             {
                 writeTexture.SetPixel(actualNode.x, actualNode.y, Color.red);
                 Q.Enqueue(new Node(actualNode.x + 1, actualNode.y));
@@ -48,5 +49,19 @@ public class FlagEditor : MonoBehaviour
         writeTexture.filterMode = FilterMode.Point;
         writeTexture.Apply();
         flag.GetComponent<SpriteRenderer>().sprite = Sprite.Create(writeTexture, new Rect(0.0f, 0.0f, writeTexture.width, writeTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+    }
+
+    // Check the validity of a point
+    private bool CheckValidity(Texture2D readTexture, int x, int y, Texture2D writeTexture, Color targetColor)
+    {
+        bool isInLimitX = 0 <= x && x <= readTexture.width;
+
+        bool isInLimitY = y <= readTexture.height && y >= 0;
+
+        bool isLimitColor = readTexture.GetPixel(x, y).Equals(limitColor);
+
+        bool isTargetColor = writeTexture.GetPixel(x, y).Equals(targetColor);
+
+        return isInLimitX && isInLimitY && !isLimitColor && !isTargetColor;
     }
 }
