@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb974c1f76bd11488cb8915247f378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textureTemplate: {fileID: 2800000, guid: bea5f0f4c550f6741a40d61569f07019, type: 3}
 --- !u!212 &904397792
 SpriteRenderer:
   m_ObjectHideFlags: 0

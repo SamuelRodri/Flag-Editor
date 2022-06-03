@@ -6,12 +6,14 @@ using UnityEngine;
 public class Flag : MonoBehaviour
 {
     private Color limitColor = Color.black;
-    Texture2D texture;
 
-    public delegate void Click(Texture2D readTexture, int x, int y);
+    public Texture2D textureTemplate;
+    private Texture2D texture;
+
+    public delegate void Click(Texture2D readTexture, Texture2D writeTexture, int x, int y);
     public event Click OnClick;
 
-    GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,7 @@ public class Flag : MonoBehaviour
             // Mouse Coordinates in Pixels in relation to Sprite
             Vector2 texSpaceCoord = texSpacePivot + localPos;
 
-            OnClick(texture, (int)texSpaceCoord.x, (int)texSpaceCoord.y); // Observer Update
+            OnClick(textureTemplate, texture, (int)texSpaceCoord.x, (int)texSpaceCoord.y); // Observer Update
         }
     }
 }
